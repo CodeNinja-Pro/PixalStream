@@ -42,8 +42,8 @@ async function logintest(email, password) {
   await page.waitForSelector('#acceptButton');
   await page.click('#acceptButton');
 
-  await page.waitForSelector('#innerRibbonContainer > div.groupContainer-186 > div > div > div > div:nth-child(1) > div > div > span > button.splitPrimaryButton.root-188');
-  await page.click('#innerRibbonContainer > div.groupContainer-186 > div > div > div > div:nth-child(1) > div > div > span > button.splitPrimaryButton.root-188');
+  await page.waitForSelector('#innerRibbonContainer > div.groupContainer-186 > div > div > div > div:nth-child(1) > div > span > button.splitPrimaryButton');
+  await page.click('#innerRibbonContainer > div.groupContainer-186 > div > div > div > div:nth-child(1) > div > span > button.splitPrimaryButton');
 
   // await page.waitForSelector('#innerRibbonContainer > div.groupContainer-185 > div > div > div > div:nth-child(1) > div > div > span > button.splitPrimaryButton.root-190');
   // await page.click('#innerRibbonContainer > div.groupContainer-185 > div > div > div > div:nth-child(1) > div > div > span > button.splitPrimaryButton.root-190');
@@ -117,8 +117,8 @@ const emailPasswordList = [
   // { email: 'natasyakuznetsova@outlook.com', password: 'VCO0116hwkk' },
   // { email: 'ahmddzeid@outlook.com', password: 'bs)#001Ggwy1579' },
   // { email: 'ekaptrii@outlook.com', password: 'jgsh)/176590-/' },
-  {email: 'raphael_azot@hotmail.fr', password: 'MonkISbEST39#'},
-  { email: 'david.monk@outlook.fr', password: 'MonkISbEST39#' }
+  { email: 'raphael_azot@hotmail.fr', password: 'MonkISbEST39#' },
+  { email: 'david.monk@outlook.fr', password: 'MonkISbEST39##' }
   
 
 ];
