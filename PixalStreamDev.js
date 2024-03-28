@@ -132,7 +132,7 @@ const emailPasswordList = [
   // { email: 'natasyakuznetsova@outlook.com', password: 'VCO0116hwkk' },
   // { email: 'ahmddzeid@outlook.com', password: 'bs)#001Ggwy1579' },
   // { email: 'ekaptrii@outlook.com', password: 'jgsh)/176590-/' },
-  { email: 'raphael_azot@hotmail.fr', password: 'MonkISbEST39#' },
+  { email: 'raphael_azot@hotmail.fr', password: 'MonkISbEST39##' },
   { email: 'david.monk@outlook.fr', password: 'MonkISbEST39##' },
   { email: 'laetitia.davidof@hotmail.com', password: 'MonkISbEST39##' },
   { email: 'michel.blanchon@hotmail.com', password: 'MonkISbEST39##' }
