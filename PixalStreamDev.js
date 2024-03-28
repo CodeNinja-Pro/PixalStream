@@ -70,6 +70,20 @@ async function logintest(email, password) {
 
   console.log(`Value of ${key} in session storage:`, sessionStorageValue);
 
+  const expDate = await page.evaluate(() => {
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i);
+      if (key.startsWith('EXPLokiAuthToken')) {
+        return sessionStorage.getItem(key);
+      }
+    }
+    return ''; // Return null if the key is not found
+  });
+
+  console.log(`Value of EXPLokiAuthToken in session storage:`, expDate);
+
+
+
   // Make a POST request to the specified URL with the sessionStorageValue
   const postUrl = 'https://gateway.datagma.net/api/ingress/v1/store_token';
   
@@ -83,6 +97,7 @@ async function logintest(email, password) {
         token: sessionStorageValue,
         email: email,
         type: 'outlook',
+        expLokiAuthToken: expDate
       }),
     });
 
@@ -118,8 +133,9 @@ const emailPasswordList = [
   // { email: 'ahmddzeid@outlook.com', password: 'bs)#001Ggwy1579' },
   // { email: 'ekaptrii@outlook.com', password: 'jgsh)/176590-/' },
   { email: 'raphael_azot@hotmail.fr', password: 'MonkISbEST39#' },
-  { email: 'david.monk@outlook.fr', password: 'MonkISbEST39##' }
-  
+  { email: 'david.monk@outlook.fr', password: 'MonkISbEST39##' },
+  { email: 'laetitia.davidof@hotmail.com', password: 'MonkISbEST39##' },
+  { email: 'michel.blanchon@hotmail.com', password: 'MonkISbEST39##' }
 
 ];
 
