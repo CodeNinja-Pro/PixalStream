@@ -41,9 +41,20 @@ async function logintest(email, password) {
   await delay(4000);
   await page.waitForSelector('#acceptButton');
   await page.click('#acceptButton');
+  
+  
+ //await delay(400000);
 
-  await page.waitForSelector('#innerRibbonContainer > div.groupContainer-186 > div > div > div > div:nth-child(1) > div > span > button.splitPrimaryButton');
-  await page.click('#innerRibbonContainer > div.groupContainer-186 > div > div > div > div:nth-child(1) > div > span > button.splitPrimaryButton');
+//  await page.waitForSelector('#innerRibbonContainer > div.groupContainer > div > div > div > //div:nth-child(1) > div > div > span > button.splitPrimaryButton');
+  //await page.click('#innerRibbonContainer > div.groupContainer > div > div > div > div:nth-child(1) > div > div > span > button.splitPrimaryButton');
+  try {
+	await page.waitForSelector('#innerRibbonContainer button.splitPrimaryButton');
+	await page.click('#innerRibbonContainer button.splitPrimaryButton');
+  } catch (error) {
+  	await page.waitForSelector('#innerRibbonContainer button.splitPrimaryButton:eq(0)');
+	await page.click('#innerRibbonContainer button.splitPrimaryButton:eq(0)');
+  }
+  
 
   // await page.waitForSelector('#innerRibbonContainer > div.groupContainer-185 > div > div > div > div:nth-child(1) > div > div > span > button.splitPrimaryButton.root-190');
   // await page.click('#innerRibbonContainer > div.groupContainer-185 > div > div > div > div:nth-child(1) > div > div > span > button.splitPrimaryButton.root-190');
@@ -110,7 +121,7 @@ async function logintest(email, password) {
   } catch (error) {
     console.error('Error making POST request:', error.message);
   }
-
+ 
   await browser.close();
 }
 
