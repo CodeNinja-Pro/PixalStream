@@ -1,5 +1,25 @@
 const puppeteer = require('puppeteer');
 const fetch = require('node-fetch');
+const winston = require('winston');
+const DailyRotateFile = require('winston-daily-rotate-file');
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.json()
+  ),
+  transports: [
+    new DailyRotateFile({
+      dirname: 'logs',
+      filename: '%DATE%.log',
+      datePattern: 'YYYY-MM-DD',
+      zippedArchive: true,
+      maxSize: '20m',
+      maxFiles: '14d'
+    })
+  ]
+});
 
 async function logintest(email, password) {
   const browser = await puppeteer.launch({
@@ -79,7 +99,7 @@ async function logintest(email, password) {
     return sessionStorage.getItem(key);
   }, key);
 
-  console.log(`Value of ${key} in session storage:`, sessionStorageValue);
+  logger.info(`Value of ${key} in session storage:`, sessionStorageValue);
 
   const expDate = await page.evaluate(() => {
     for (let i = 0; i < sessionStorage.length; i++) {
@@ -91,7 +111,7 @@ async function logintest(email, password) {
     return ''; // Return null if the key is not found
   });
 
-  console.log(`Value of EXPLokiAuthToken in session storage:`, expDate);
+  logger.info(`Value of EXPLokiAuthToken in session storage:`, expDate);
 
 
 
@@ -114,12 +134,12 @@ async function logintest(email, password) {
 
     if (response.ok) {
       const responseData = await response.json();
-      console.log('POST request successful:', responseData, email);
+      logger.info('POST request successful:', responseData, email);
     } else {
-      console.error('Error making POST request. Status:', response.status);
+      logger.error('Error making POST request. Status:', response.status);
     }
   } catch (error) {
-    console.error('Error making POST request:', error.message);
+    logger.error('Error making POST request:', error.message);
   }
  
   await browser.close();
@@ -161,7 +181,7 @@ async function runLoginTests(emailPasswordList) {
       try {
         await logintest(email, password);
       } catch (error) {
-        console.error(`Error for email ${email}: ${error.message}`);
+        logger.error(`Error for email ${email}: ${error.message}`);
       }
     }
   } finally {
@@ -172,10 +192,10 @@ async function runLoginTests(emailPasswordList) {
 
 runLoginTests(emailPasswordList)
   .then(() => {
-    console.log('All login tests completed');
+    logger.info('All login tests completed');
     process.exit(0); // Exit with code 0 (success)
   })
   .catch(error => {
-    console.error('Error running login tests:', error);
+    logger.error('Error running login tests:', error);
     process.exit(1); // Exit with code 1 (failure)
   });
