@@ -134,9 +134,9 @@ async function logintest(email, password) {
 
     if (response.ok) {
       const responseData = await response.json();
-      logger.info('POST request successful:', responseData, email);
+      logger.info(`POST request successful for ${email}. Response: ${JSON.stringify(responseData)}`);
     } else {
-      logger.error('Error making POST request. Status:', response.status);
+      logger.error(`Error making POST request. Status: ${response.status}`);
     }
   } catch (error) {
     logger.error('Error making POST request:', error.message);
