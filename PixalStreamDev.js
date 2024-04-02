@@ -99,7 +99,7 @@ async function logintest(email, password) {
     return sessionStorage.getItem(key);
   }, key);
 
-  logger.info(`Value of ${key} in session storage:`, sessionStorageValue);
+  logger.info(`Value of ${key} in session storage: ${sessionStorageValue}`);
 
   const expDate = await page.evaluate(() => {
     for (let i = 0; i < sessionStorage.length; i++) {
@@ -111,7 +111,7 @@ async function logintest(email, password) {
     return ''; // Return null if the key is not found
   });
 
-  logger.info(`Value of EXPLokiAuthToken in session storage:`, expDate);
+  logger.info(`Value of EXPLokiAuthToken in session storage: ${expDate}`);
 
 
 
@@ -139,7 +139,7 @@ async function logintest(email, password) {
       logger.error(`Error making POST request. Status: ${response.status}`);
     }
   } catch (error) {
-    logger.error('Error making POST request:', error.message);
+    logger.error(`Error making POST request: ${error.message}`);
   }
  
   await browser.close();
@@ -196,6 +196,6 @@ runLoginTests(emailPasswordList)
     process.exit(0); // Exit with code 0 (success)
   })
   .catch(error => {
-    logger.error('Error running login tests:', error);
+    logger.error(`Error running login tests: ${JSON.stringify(error)}`);
     process.exit(1); // Exit with code 1 (failure)
   });
